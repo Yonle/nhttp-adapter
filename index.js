@@ -22,7 +22,24 @@ if (!process.env.NO_CLUSTERS && cluster.isPrimary) {
 
 const WebSocket = require("ws");
 let got = import("got").then(_ => got = _.got);
-const wss = new WebSocket.WebSocketServer({ port: config.port });
+const http = require("http");
+const server = http.createServer();
+const wss = new WebSocket.WebSocketServer({ server });
+
+server.on('request', (req, res) => {
+  return res.writeHead(200, {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
+  }).end(JSON.stringify(config.server_meta || {
+    "contact": "unset",
+    "pubkey": "0000000000000000000000000000000000000000000000000000000000000000",
+    "description": "nhttp adapter.",
+    "name": "nhttp",
+    "software": "git+https://github.com/Yonle/nhttp_adapter",
+    "supported_nips": [1,2,9,11,12,15,16,20,22,33,40,50],
+    "version": require("./package.json").version
+  }));
+});
 
 const s = (w, m) => w.send(JSON.stringify(m));
 wss.on('connection', ws => {
@@ -93,3 +110,5 @@ wss.on('connection', ws => {
 });
 
 process.on('unhandledRejection', console.error);
+
+const listener = server.listen(config.port, _ => console.log("Adapter is now listening on port", listener.address().port));
