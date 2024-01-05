@@ -1,5 +1,5 @@
 ## nhttp-adapter
-An adapter of nhttp (nostr-over-http) to nostr websocket relay.
+An adapter for NoH relay server to nostr websocket relay.
 
 ## Setting up
 ```

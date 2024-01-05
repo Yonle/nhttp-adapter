@@ -4,7 +4,7 @@
     "ws": "^8.16.0"
   },
   "name": "nhttp-adapter",
-  "description": "An adapter of nhttp (nostr-over-http) to nostr websocket relay.",
+  "description": "An adapter for NoH relay server to nostr websocket relay.",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {},
