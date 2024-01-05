@@ -1,0 +1,9 @@
+module.exports = {
+  nhttp_urls: [
+    // "http://example1.com",
+    // "https://example2.com/anotherEndpoint",
+    // ....
+  ],
+  port: 4000,
+  clusters: 1
+}

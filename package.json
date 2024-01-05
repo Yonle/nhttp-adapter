@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "got": "^14.0.0",
+    "ws": "^8.16.0"
+  },
+  "name": "nhttp-adapter",
+  "description": "An adapter of nhttp (nostr-over-http) to nostr websocket relay.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Yonle/nhttp-adapter.git"
+  },
+  "keywords": [
+    "nostr",
+    "relay",
+    "http"
+  ],
+  "author": "Yonle <yonle@lecturify.net>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/Yonle/nhttp-adapter/issues"
+  },
+  "homepage": "https://github.com/Yonle/nhttp-adapter#readme"
+}
