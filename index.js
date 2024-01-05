@@ -56,7 +56,9 @@ wss.on('connection', ws => {
         for (i of config.nhttp_urls) {
           got.post(i + "/publish", {
             json: data[1]
-          });
+          }).json().then(body => {
+            if (body.notice) s(ws, ["NOTICE", body.notice]);
+          }).catch(console.error);
         }
         s(ws, ["OK", data[1], true, ""]);
         break;
@@ -77,8 +79,13 @@ wss.on('connection', ws => {
               searchParams: data[2]
             }).json();
 
-            events = [...events, ...body.events?.map(i => ["EVENT", data[1], i])];
-          } catch (e){console.error(e)}
+            if (body.status !== 0) continue;
+            if (body.notice) s(ws, ["NOTICE", body.notice]);
+
+            events = [...events, ...body.results?.map(i => ["EVENT", data[1], i])];
+          } catch (e) {
+            console.error(e)
+          }
         }
 
         for (i of events) {
