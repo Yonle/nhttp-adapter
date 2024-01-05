@@ -61,7 +61,7 @@ wss.on('connection', ws => {
             }).json();
 
             events = [...events, ...body.events?.map(i => ["EVENT", data[1], i])];
-          } catch {}
+          } catch (e){console.error(e)}
         }
 
         for (i of events) {
@@ -69,7 +69,10 @@ wss.on('connection', ws => {
           s(ws, i);
         }
 
-        if (openSub.has(data[1])) s(ws, ["CLOSED", data[1], ""])
+        if (openSub.has(data[1])) {
+          s(ws, ["EOSE", data[1]]);
+          s(ws, ["CLOSED", data[1], ""]);
+        }
         openSub.delete(data[1]);
 
         break;
