@@ -79,7 +79,6 @@ wss.on('connection', ws => {
               searchParams: data[2]
             }).json();
 
-            if (body.status !== 0) continue;
             if (body.notice) s(ws, ["NOTICE", body.notice]);
 
             events = [...events, ...body.results?.map(i => ["EVENT", data[1], i])];
